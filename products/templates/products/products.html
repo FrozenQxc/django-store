@@ -1,64 +1,50 @@
-{% extends 'products/base.html' %} 
-{% load static %} 
-
-{% block css %}
-		<link href="{% static 'css/products.css' %}" rel="stylesheet" />
-{% endblock %}
-
-{% block content %}
-<div class='main'>
+{% extends 'products/base.html' %} {% load static %} {% block css %}
+<link href="{% static 'css/products.css' %}" rel="stylesheet" />
+{% endblock %} {% block content %}
+<div class="main">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3">
 				<h1 class="my-4">Store</h1>
 				<div class="list-group">
-					<a href="#" class="list-group-item">Новинки</a>
-					<a href="#" class="list-group-item">Одежда</a>
-					<a href="#" class="list-group-item">Обувь</a>
-					<a href="#" class="list-group-item">Аксессуары</a>
-					<a href="#" class="list-group-item">Подарки</a>
+					{% for category in categories %}
+					<a href="#" class="list-group-item">{{ category.name }}</a>
+					{% endfor %}
 				</div>
 			</div>
 
-
 			<div class="col-lg-9">
+				<!-- Слайдер -->
 				<div
 					id="carouselExampleIndicators"
 					class="carousel slide my-4"
 					data-ride="carousel"
 				>
+					<!-- Индикаторы -->
 					<ol class="carousel-indicators">
+						{% for slider in sliders %}
 						<li
 							data-target="#carouselExampleIndicators"
-							data-slide-to="0"
-							class="active"
+							data-slide-to="{{ forloop.counter0 }}"
+							class="{% if forloop.first %}active{% endif %}"
 						></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-						<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+						{% endfor %}
 					</ol>
+
+					<!-- Слайды -->
 					<div class="carousel-inner" role="listbox">
-						<div class="carousel-item active">
+						{% for slider in sliders %}
+						<div class="carousel-item {% if forloop.first %}active{% endif %}">
 							<img
-								class="d-block img-fluid"
-								src="/static/vendor/img/slides/slide-1.jpg"
-								alt="First slide"
+								class="slide-img"
+								src="{{ slider.image.url }}"
+								alt="{{ slider.name }}"
 							/>
 						</div>
-						<div class="carousel-item">
-							<img
-								class="d-block img-fluid"
-								src="/static/vendor/img/slides/slide-2.jpg"
-								alt="Second slide"
-							/>
-						</div>
-						<div class="carousel-item">
-							<img
-								class="d-block img-fluid"
-								src="/static/vendor/img/slides/slide-3.jpg"
-								alt="Third slide"
-							/>
-						</div>
+						{% endfor %}
 					</div>
+
+					<!-- Навигация -->
 					<a
 						class="carousel-control-prev"
 						href="#carouselExampleIndicators"
@@ -80,25 +66,22 @@
 				</div>
 
 				<div class="row">
+					{% for product in products %}
 					<div class="col-lg-4 col-md-6 mb-4">
 						<div class="card h-100">
 							<a href="#">
 								<img
 									class="card-img-top"
-									src="/static/vendor/img/products/Adidas-hoodie.png"
 									alt=""
+									src="{{ product.image.url }}"
 								/>
 							</a>
 							<div class="card-body">
 								<h4 class="card-title">
-									<a href="#"
-										>Худи черного цвета с монограммами adidas Originals</a
-									>
+									<a href="#">{{ product.name }}</a>
 								</h4>
-								<h5>6 090,00 руб.</h5>
-								<p class="card-text">
-									Мягкая ткань для свитшотов. Стиль и комфорт – это образ жизни.
-								</p>
+								<h5>{{ product.price }}</h5>
+								<p class="card-text">{{ product.description }}</p>
 							</div>
 							<div class="card-footer text-center">
 								<button type="button" class="btn btn-outline-success">
@@ -107,169 +90,46 @@
 							</div>
 						</div>
 					</div>
-
-					<div class="col-lg-4 col-md-6 mb-4">
-						<div class="card h-100">
-							<a href="#">
-								<img
-									class="card-img-top"
-									src="/static/vendor/img/products/Blue-jacket-The-North-Face.png"
-									alt=""
-								/>
-							</a>
-							<div class="card-body">
-								<h4 class="card-title">
-									<a href="#">Синяя куртка The North Face</a>
-								</h4>
-								<h5>23 725,00 руб.</h5>
-								<p class="card-text">
-									Гладкая ткань. Водонепроницаемое покрытие. Легкий и теплый
-									пуховый наполнитель.
-								</p>
-							</div>
-							<div class="card-footer text-center">
-								<button type="button" class="btn btn-outline-success">
-									Отправить в корзину
-								</button>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 mb-4">
-						<div class="card h-100">
-							<a href="#">
-								<img
-									class="card-img-top"
-									src="/static/vendor/img/products/Brown-sports-oversized-top-ASOS-DESIGN.png"
-									alt=""
-								/>
-							</a>
-							<div class="card-body">
-								<h4 class="card-title">
-									<a href="#"
-										>Коричневый спортивный oversized-топ ASOS DESIGN</a
-									>
-								</h4>
-								<h5>3 390,00 руб.</h5>
-								<p class="card-text">
-									Материал с плюшевой текстурой. Удобный и мягкий.
-								</p>
-							</div>
-							<div class="card-footer text-center">
-								<button type="button" class="btn btn-outline-success">
-									Отправить в корзину
-								</button>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 mb-4">
-						<div class="card h-100">
-							<a href="#">
-								<img
-									class="card-img-top"
-									src="/static/vendor/img/products/Black-Nike-Heritage-backpack.png"
-									alt=""
-								/>
-							</a>
-							<div class="card-body">
-								<h4 class="card-title">
-									<a href="#">Черный рюкзак Nike Heritage</a>
-								</h4>
-								<h5>2 340,00 руб.</h5>
-								<p class="card-text">Плотная ткань. Легкий материал.</p>
-							</div>
-							<div class="card-footer text-center">
-								<button type="button" class="btn btn-outline-success">
-									Отправить в корзину
-								</button>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 mb-4">
-						<div class="card h-100">
-							<a href="#">
-								<img
-									class="card-img-top"
-									src="/static/vendor/img/products/Black-Dr-Martens-shoes.png"
-									alt=""
-								/>
-							</a>
-							<div class="card-body">
-								<h4 class="card-title">
-									<a href="#"
-										>Черные туфли на платформе с 3 парами люверсов Dr Martens
-										1461 Bex</a
-									>
-								</h4>
-								<h5>13 590,00 руб.</h5>
-								<p class="card-text">
-									Гладкий кожаный верх. Натуральный материал.
-								</p>
-							</div>
-							<div class="card-footer text-center">
-								<button type="button" class="btn btn-outline-success">
-									Отправить в корзину
-								</button>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-lg-4 col-md-6 mb-4">
-						<div class="card h-100">
-							<a href="#">
-								<img
-									class="card-img-top"
-									src="vendor/img/products/Dark-blue-wide-leg-ASOs-DESIGN-trousers.png"
-									alt=""
-								/>
-							</a>
-							<div class="card-body">
-								<h4 class="card-title">
-									<a href="#">Темно-синие широкие строгие брюки ASOS DESIGN</a>
-								</h4>
-								<h5>2 890,00 руб.</h5>
-								<p class="card-text">
-									Легкая эластичная ткань сирсакер Фактурная ткань.
-								</p>
-							</div>
-							<div class="card-footer text-center">
-								<button type="button" class="btn btn-outline-success">
-									Отправить в корзину
-								</button>
-							</div>
-						</div>
-					</div>
+					{% endfor %}
 				</div>
 
+				<!-- пагинация -->
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
-						<li class="page-item disabled">
-							<a class="page-link" href="#" tabindex="-1" aria-disabled="true"
-								>Previous</a
+						{% if products.has_previous %}
+						<li class="page-item">
+							<a
+								class="page-link"
+								href="?page={{ products.previous_page_number }}"
+								>&laquo;</a
 							>
 						</li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item">
-							<a class="page-link" href="#">Next</a>
+						{% endif %} {% for i in products.paginator.page_range %}
+						<li
+							class="page-item {% if products.number == i %}active{% endif %}"
+						>
+							<a class="page-link" href="?page={{ i }}">{{ i }}</a>
 						</li>
+						{% endfor %} {% if products.has_next %}
+						<li class="page-item">
+							<a class="page-link" href="?page={{ products.next_page_number }}"
+								>Next &raquo;</a
+							>
+						</li>
+						{% endif %}
 					</ul>
 				</nav>
 			</div>
 		</div>
 	</div>
 
-
 	{% block footer %}
-		<footer class="py-5 bg-dark">
-			<div class="container">
-				<p class="m-0 text-center text-white">Copyright &copy; Store 2022</p>
-			</div>
-		</footer>
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; Store 2022</p>
+		</div>
+	</footer>
 	{% endblock %}
-
 </div>
+
 {% endblock %}

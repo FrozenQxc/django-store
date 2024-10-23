@@ -1,5 +1,5 @@
 body {
-	background: url('../vendor/img/wall.jpg') no-repeat center top fixed;
+	background: url('../img/123.jpg') no-repeat center top fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	background-size: cover;
@@ -7,10 +7,24 @@ body {
 	padding-top: 56px;
 }
 
+.title {
+	color: #0d71eb;
+}
+
+.description {
+	color: #0d71eb;
+	font-size: 20px;
+}
+
 #start-purchase-btn {
 	background-color: #23364e;
-	border-color: #23364e;
+	border-color: #0d71eb;
 	color: white;
+}
+
+#start-purchase-btn:hover {
+	background-color: #0d71eb;
+	border-color: #0d71eb;
 }
 
 #start-purchase-link {
