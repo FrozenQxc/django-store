@@ -5,12 +5,12 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Store</title>
+		<title>Магазин</title>
 		<link
 			rel="stylesheet"
 			href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
 		/>
-
+		<link rel="icon" href="{% static 'img/favicon.png' %}" />
 		{% block css %} {% endblock %}
 	</head>
 	<body>
@@ -37,7 +37,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="users/login.html"
+							<a class="nav-link" href="{% url 'users:login' %}"
 								>Войти <i class="fas fa-sign-in-alt"></i
 							></a>
 						</li>
