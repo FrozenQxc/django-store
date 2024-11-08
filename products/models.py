@@ -2,6 +2,8 @@ from django.db import models
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
+from users.models import User
+
 
 class ProductCategory(models.Model):
   name = models.CharField(max_length=128)
@@ -29,7 +31,19 @@ class Slider(models.Model):
     def __str__(self):
         return self.name
 
+#* Удалить картинку слайдера из папки 
 @receiver(post_delete, sender=Slider)
 def delete_slider_image(sender, instance, **kwargs):
     if instance.image:
         instance.image.delete(False)  
+        
+class Basket(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=0)
+    created_timestamp = models.DateTimeField(auto_now_add=True) #* Если создался новый объект то ему присваивает текущую дату
+    
+    def __str__(self):
+        return f'Корзина для {self.user.email} | Продукт: {self.product.name}'
+    
+     

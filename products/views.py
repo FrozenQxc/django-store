@@ -7,7 +7,6 @@ from products.models import Product, ProductCategory, Slider
 def index(request):
   return render(request, 'products/index.html')
 
-
 def products(request): 
   context = {
     'products': Product.objects.all(),
