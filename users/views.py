@@ -2,20 +2,44 @@ from django.contrib import auth, messages
 from django.shortcuts import HttpResponseRedirect, render
 from django.urls import reverse
 
+from products.models import Basket, Product
 from users.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
 
 # from users.models import User
 
 def profile(request):
-  if request.method == 'POST':
-    form =  UserProfileForm(data=request.POST, instance=request.user)
-    if form.is_valid():
-      form.save()
-      return HttpResponseRedirect(reverse('users:profile'))
-  else: 
-    form = UserProfileForm(instance=request.user)
-  context = {'form': form} 
-  return render(request, 'user/profile.html', context)
+    if request.method == 'POST':
+        form = UserProfileForm(data=request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('users:profile'))
+    else: 
+        form = UserProfileForm(instance=request.user)
+        
+    context = {
+        'form': form,
+        'baskets': Basket.objects.filter(user=request.user),
+    } 
+    return render(request, 'user/profile.html', context)
+
+
+def basket_add(request, product_id):
+  product = Product.objects.get(id=product_id)
+  baskets = Basket.objects.filter(user=request.user, product=product)
+  
+  if not baskets.exists():
+    Basket.objects.create(user=request.user, product=product, quantity=1)
+  else:
+    baskets = baskets.first()
+    baskets.quantity += 1
+    baskets.save() 
+  
+  return HttpResponseRedirect(request.META['HTTP_REFERER'])
+
+def basket_remove(request, basket_id):  
+    basket = Basket.objects.get(id=basket_id)  
+    basket.delete()  
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 def register(request):
   if request.method == 'POST':

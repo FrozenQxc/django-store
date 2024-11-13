@@ -1,6 +1,10 @@
-{% extends 'products/base.html' %} {% load static %} {% block css %}
-<link href="{% static 'css/products.css' %}" rel="stylesheet" />
-{% endblock %} {% block content %}
+{% extends 'products/base.html' %} {% load static %} 
+
+{% block css %}
+	<link href="{% static 'css/products.css' %}" rel="stylesheet" />
+{% endblock %} 
+
+{% block content %}
 <div class="main">
 	<div class="container">
 		<div class="row">
@@ -84,10 +88,11 @@
 								<p class="card-text">{{ product.description }}</p>
 							</div>
 							<div class="card-footer text-center">
-								<button type="button" class="btn btn-outline-success">
-									Отправить в корзину
-								</button>
-							</div>
+								<a class="btn btn-outline-success"
+									 href="{% url 'products:basket_add' product.id %}">
+										Отправить в корзину
+								</a>
+						</div>
 						</div>
 					</div>
 					{% endfor %}

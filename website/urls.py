@@ -8,13 +8,10 @@ from products.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     
-    # Главная страница
     path('', index, name='index'),
     
-    # Исправленный импорт: добавляем правильные модули
     path('products/', include('products.urls', namespace='products')),
     path('users/', include('users.urls', namespace='users')),
 ]
 
-# Обработка статических файлов
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
