@@ -36,6 +36,13 @@ class Slider(models.Model):
 def delete_slider_image(sender, instance, **kwargs):
     if instance.image:
         instance.image.delete(False)  
+
+class BasketQuerySet(models.QuerySet):
+  def total_sum(self):
+    return sum(basket.sum() for basket in self)
+  
+  def total_quantity(self):
+    return sum(basket.quantity for basket in self)  
         
 class Basket(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
@@ -43,7 +50,11 @@ class Basket(models.Model):
     quantity = models.PositiveIntegerField(default=0)
     created_timestamp = models.DateTimeField(auto_now_add=True) #* Если создался новый объект то ему присваивает текущую дату
     
+    objects = BasketQuerySet.as_manager()
+    
     def __str__(self):
         return f'Корзина для {self.user.email} | Продукт: {self.product.name}'
     
-     
+    def sum(self):
+        return self.quantity * self.product.price
+      
