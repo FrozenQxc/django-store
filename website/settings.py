@@ -91,3 +91,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # users 
 AUTH_USER_MODEL = 'users.User'
+
+LOGIN_URL = '/users/login/'
