@@ -1,9 +1,6 @@
-{% extends 'products/base.html' %} {% load static %} 
-{% block css %}	
-	<link href="{% static 'css/products.css' %}" rel="stylesheet" />
-{% endblock %} 
-
-{% block content %}
+{% extends 'products/base.html' %} {% load static %} {% block css %}
+<link href="{% static 'css/products.css' %}" rel="stylesheet" />
+{% endblock %} {% block content %}
 <div class="main">
 	<div class="container">
 		<div class="row">
@@ -107,10 +104,44 @@
 					{% endfor %}
 				</div>
 
-				<!-- пагинация -->
+				<!-- Пагинация -->
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center">
-						
+						<!-- Кнопка назад -->
+						<li
+							class="page-item {% if not products.has_previous %}disabled{% endif %}"
+						>
+							<a
+								class="page-link"
+								href="{% if products.has_previous %}{% url 'products:paginator' products.previous_page_number %}{% else %}#{% endif %}"
+							>
+								&laquo;
+							</a>
+						</li>
+
+						<!-- Список страниц -->
+						{% for page in products.paginator.page_range %}
+						<li
+							class="page-item {% if products.number == page %}active{% endif %}"
+						>
+							<a class="page-link" href="{% url 'products:paginator' page %}"
+								>{{ page }}</a
+							>
+						</li>
+						{% endfor %}
+
+						<!-- Кнопка вперед -->
+						<li
+							class="page-item {% if not products.has_next %}disabled{% endif %}"
+						>
+							<a
+								class="page-link"
+								href="{% if products.has_next %}{% url 'products:paginator' products.next_page_number %}{% else %}#{% endif %}"
+							>
+								&raquo;
+							</a>
+						</li>
+					</ul>
 				</nav>
 			</div>
 		</div>
