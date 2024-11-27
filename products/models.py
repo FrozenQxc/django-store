@@ -9,6 +9,10 @@ class ProductCategory(models.Model):
   name = models.CharField(max_length=128)
   description = models.TextField(null=True, blank=True)
   
+  class Meta:
+    verbose_name = 'Категории'
+    verbose_name_plural = 'Категория' 
+  
   def __str__(self):
     return self.name
   
@@ -18,6 +22,10 @@ class Product(models.Model):
   price = models.DecimalField(max_digits=6, decimal_places=2)
   quantity = models.PositiveIntegerField(default=0)
   image = models.ImageField(upload_to='products_images')
+  
+  class Meta:
+    verbose_name = 'Продукт'
+    verbose_name_plural = 'Продукты'
   
   category = models.ForeignKey(to=ProductCategory, on_delete=models.CASCADE) #!Привязка к категории 
 
