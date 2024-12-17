@@ -2,6 +2,7 @@ from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect, render
 from django.urls import reverse
+from users.models import User
 
 from products.models import Basket, Product
 from users.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
@@ -23,6 +24,17 @@ def profile(request):
         'baskets': Basket.objects.filter(user=request.user),
     } 
     return render(request, 'user/profile.html', context)
+  
+@login_required
+def user_list(request):
+    users = User.objects.all()  
+    
+    context = {
+        'users': users  
+    }
+    
+    return render(request, 'user/user_list.html', context)
+
 
 @login_required
 def basket_add(request, product_id):
