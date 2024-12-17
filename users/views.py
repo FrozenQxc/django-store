@@ -7,8 +7,6 @@ from users.models import User
 from products.models import Basket, Product
 from users.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
 
-
-# from users.models import User
 @login_required
 def profile(request):
     if request.method == 'POST':
