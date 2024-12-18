@@ -1,1 +1,28 @@
-<h1>Это тест</h1>
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Последние новости</h2>
+                <ul>
+                    {% for blog in blogs %}
+                        <li>
+                            <a href="{% url 'blog:detail' blog.id %}">{{ blog.title }}</a> — {{ blog.created_at|date:"d M Y" }}
+                            <p>{{ blog.description|slice:":100" }}...</p> <!-- Краткое описание -->
+                        </li>
+                    {% empty %}
+                        <li>Нет новостей</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

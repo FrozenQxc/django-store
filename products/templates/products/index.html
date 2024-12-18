@@ -1,5 +1,5 @@
-{% extends 'products/base.html' %} 
-{% load static %} 
+{% extends 'products/base.html' %}
+{% load static %}
 
 {% block css %}
     <link href="{% static 'css/main.css' %}" rel="stylesheet" />
@@ -10,15 +10,28 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <h1 class="title mt-3">Store</h1>
+                <h1 class="title mt-3">Добро пожаловать в наш сервис доставки пиццы!</h1>
                 <p class='description'>
-                    Новые образы и лучшие бренды на Store. Бесплатная доставка по всему
-                    миру! Аутлет: до -70% Собственный бренд. -20% новым покупателям.
+                    Добро пожаловать в нашу пиццерию! Мы предлагаем широкий выбор пицц с доставкой на дом. Наслаждайтесь вкусом и качеством!
                 </p>
-                <button id="start-purchase-btn" type="button" class="btn btn-lg">
-                    <a id="start-purchase-link" href="{% url 'products:index' %}"> Начать покупки </a>
-                </button>
+                <h2>Последние новости</h2>
+                <ul>
+                    {% for blog in latest_news %}
+                        <li>
+                            <!-- Ссылка на страницу блога -->
+                            <a href="{% url 'blog:detail' blog.id %}">{{ blog.title }}</a> — {{ blog.created_at|date:"d M Y" }}
+                        </li>
+                    {% empty %}
+                        <li>Нет новостей</li>
+                    {% endfor %}
+                </ul>
+                <h3>Акции и специальные предложения</h3>
+                <ul>
+                    <li>Пицца на выбор по скидке 20% в будние дни!</li>
+                    <li>Бесплатная доставка при заказе от 1500 рублей!</li>
+                </ul>
             </div>
+           
         </div>
     </div>
 </section>

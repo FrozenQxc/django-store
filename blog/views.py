@@ -13,8 +13,7 @@ from django.utils.timezone import datetime
 from .forms import BlogForm, CommentForm, Feedback
 from .models import Blog, Category, Comment
 
-def home(request):
-    return render(request, 'blog/index.html')
+
 
 @login_required    
 def create_blog(request):
@@ -56,9 +55,11 @@ def delete_blog(request, blog_pk):
         return redirect('account')
 
 def detail(request, blog_id):
+    # Получаем блог по ID
     blog = get_object_or_404(Blog, pk=blog_id)
-    comments = Comment.objects.filter(post=blog_id)
-    
+    # Получаем все комментарии для этого блога
+    comments = Comment.objects.filter(post=blog)
+
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -67,12 +68,11 @@ def detail(request, blog_id):
             comment_f.date = datetime.now()
             comment_f.post = blog
             comment_f.save()
-            return redirect('blog:detail', blog_id=blog_id)  # Измененный вызов
+            return redirect('blog:detail', blog_id=blog_id)
     else:
         form = CommentForm()
-    
-    return render(request, 'blog/detail.html', {'blog': blog, 'form': form, 'comments': comments})
 
+    return render(request, 'detail.html', {'blog': blog, 'form': form, 'comments': comments})
 
 def blog(request):
     categories = Category.objects.all() 

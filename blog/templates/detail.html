@@ -1,0 +1,41 @@
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <h1>{{ blog.title }}</h1>
+                <p>Дата: {{ blog.created_at|date:"d M Y" }}</p>
+                <img src="{{ blog.image.url }}" alt="{{ blog.title }}" class="img-fluid">
+                <div class="content">
+                    <p>{{ blog.content }}</p>
+                </div>
+
+                <h3>Комментарии</h3>
+                <ul>
+                    {% for comment in comments %}
+                        <li>
+                            <strong>{{ comment.author.username }}:</strong> {{ comment.text }}
+                        </li>
+                    {% empty %}
+                        <li>Нет комментариев.</li>
+                    {% endfor %}
+                </ul>
+
+                <h4>Оставить комментарий</h4>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
