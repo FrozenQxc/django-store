@@ -1,5 +1,7 @@
-{% extends 'products/base.html' %} {% block content %}
-<div class="container">
+{% extends 'products/base.html' %}
+
+{% block content %}
+<div class="container mt-5 pt-5">
 	<h2>Мои заказы</h2>
 	{% for order in orders %}
 	<div class="card mb-3">
@@ -23,3 +25,4 @@
 	{% endfor %}
 </div>
 {% endblock %}
+

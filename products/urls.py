@@ -1,14 +1,22 @@
-from django.urls import path
-from products.views import products,about, order_view,confirm_order, order_list, order_success
-from users.views import basket_add, basket_remove
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path
+
+from products.views import (
+    about,
+    confirm_order,
+    order_list,
+    order_success,
+    order_view,
+    products,
+)
+from users.views import basket_add, basket_remove
 
 app_name = 'products'
 
 urlpatterns = [
     path('order/', order_view, name='order'),
-    path('orders/', order_list, name='order_list'),  # Добавляем путь для списка заказов
+    path('orders/', order_list, name='order_list'),  
     path('order/confirm/', confirm_order, name='confirm_order'),
     path('order/success/<int:order_id>/', order_success, name='order_success'),
     

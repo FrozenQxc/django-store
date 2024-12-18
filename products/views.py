@@ -1,20 +1,15 @@
-from django.core.paginator import Paginator
-from django.shortcuts import render
-
-from products.models import Product, ProductCategory, Slider
-from blog.models import Blog
-
-from django.shortcuts import render, redirect
-from .models import Basket
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404
-from .models import Order
+from django.shortcuts import get_object_or_404, redirect, render
+
+from blog.models import Blog
+from products.models import Product, ProductCategory, Slider
 
 #! функции = контроллеры = вьюхи
-
 # views.py
 from .models import Basket, Order, OrderItem
+
 
 @login_required
 def order_view(request):
@@ -52,7 +47,6 @@ def order_success(request, order_id):
 def order_list(request):
     orders = Order.objects.filter(user=request.user)
     
-    # Считаем сумму для каждого заказа
     for order in orders:
         order.total_price = sum(item.price * item.quantity for item in order.items.all())
     

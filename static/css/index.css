@@ -5,6 +5,14 @@
 	margin-right: 30px; /* Отступ между логотипом и остальными ссылками */
 }
 
+body {
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+	padding-top: 77px;
+}
+
 .navbar a {
 	margin-left: 15px; /* Отступ между ссылками */
 	text-decoration: none; /* Уберем подчеркивание */

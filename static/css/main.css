@@ -3,7 +3,7 @@ body {
 	-moz-background-size: cover;
 	background-size: cover;
 	-o-background-size: cover;
-	padding-top: 56px;
+	padding-top: 77px;
 }
 
 .title {
@@ -29,4 +29,12 @@ body {
 #start-purchase-link {
 	text-decoration: none;
 	color: white;
+}
+
+.content {
+	margin-top: 20px;
+}
+
+body {
+	padding-top: calc(var(--bs-navbar-height, 77px));
 }
