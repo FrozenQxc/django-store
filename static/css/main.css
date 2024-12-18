@@ -84,3 +84,52 @@ body {
 	display: flex;
 	justify-content: flex-end;
 }
+
+
+
+/* Стили для навбара */
+.navbar-brand {
+	font-size: 24px; /* Увеличим шрифт для логотипа */
+	font-weight: bold;
+	margin-right: 30px; /* Отступ между логотипом и остальными ссылками */
+}
+
+body {
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+	padding-top: 77px;
+}
+
+.navbar a {
+	margin-left: 15px; /* Отступ между ссылками */
+	text-decoration: none; /* Уберем подчеркивание */
+	color: #ff6347; 
+	font-size: 18px; /* Размер текста */
+}
+
+.navbar a:hover {
+	color: #c9361c; 
+}
+
+
+
+/* Сетка для выравнивания */
+.navbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 20px;
+}
+
+/* Убедимся, что логотип и ссылки не на одной линии */
+.navbar .navbar-brand {
+	flex-shrink: 0;
+}
+
+.navbar .navbar-links {
+	flex-grow: 1;
+	display: flex;
+	justify-content: flex-end;
+}

@@ -1,5 +1,10 @@
 {% extends 'products/base.html' %}
 
+
+{% block css %}
+    <link href="{% static 'css/main' %}" rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
 <div class="container mt-5 pt-5">
 	<h2>Мои заказы</h2>
