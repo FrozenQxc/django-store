@@ -1,0 +1,47 @@
+/* Контейнер и отступы */
+.contacts-page .container {
+	margin-top: 65px;
+}
+
+/* Заголовки */
+.contacts-page h1,
+.contacts-page h3 {
+	color: #333;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+/* Текст абзацев */
+.contacts-page p,
+.contacts-page ul {
+	font-size: 16px;
+	color: #555;
+}
+
+/* Добавление отступов для секций */
+.contacts-page .row {
+	margin-bottom: 30px;
+}
+
+/* Украсим список телефонов */
+.contacts-page ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.contacts-page ul li {
+	padding-left: 20px;
+	position: relative;
+}
+
+.contacts-page ul li::before {
+	content: '📞';
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+/* Стилизация информации о разработчике */
+.contacts-page strong {
+	color: #0066cc;
+}

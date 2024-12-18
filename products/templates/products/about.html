@@ -1,0 +1,39 @@
+{% extends 'products/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link href="{% static 'css/about.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<section class="contacts-page">
+    <div class="container">
+        <h1 class="mt-4">Контакты</h1>
+        
+        <!-- Адрес организации -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Наш адрес</h3>
+                <p>г. Москва, ул. Примерная, д. 25, оф. 10</p>
+            </div>
+
+            <!-- Контактные телефоны -->
+            <div class="col-md-6">
+                <h3>Контактные телефоны</h3>
+                <ul>
+                    <li>+7 (495) 123-45-67</li>
+                    <li>+7 (495) 234-56-78</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Информация о разработчике -->
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <h3>Информация о разработчике</h3>
+                <p>Сайт разработан командой <strong>WebMaster Studio</strong>. Мы предоставляем услуги по разработке и поддержке сайтов. Обратитесь к нам для создания вашего интернет-ресурса!</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

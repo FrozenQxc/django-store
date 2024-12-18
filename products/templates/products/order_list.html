@@ -1,0 +1,25 @@
+{% extends 'products/base.html' %} {% block content %}
+<div class="container">
+	<h2>Мои заказы</h2>
+	{% for order in orders %}
+	<div class="card mb-3">
+		<div class="card-body">
+			<h5 class="card-title">
+				Заказ №{{ order.id }} ({{ order.get_status_display }})
+			</h5>
+			<p>Дата: {{ order.created_at }}</p>
+			<p>Адрес доставки: {{ order.address }}</p>
+			<ul>
+				{% for item in order.items.all %}
+				<li>
+					{{ item.product.name }} - {{ item.quantity }} шт. ({{ item.price }}
+					руб.)
+				</li>
+				{% endfor %}
+			</ul>
+			<p><strong>Итог:</strong> {{ order.total_price }} руб.</p>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}
